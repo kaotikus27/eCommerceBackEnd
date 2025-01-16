@@ -13,7 +13,7 @@ import com.hercodecommerce.demo.service.CheckoutService;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/api/checkout")
+@RequestMapping("/api/checkout/purchase")
 public class CheckoutController {
 	
 	private CheckoutService checkoutService;

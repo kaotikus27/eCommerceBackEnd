@@ -33,8 +33,8 @@ public class Order {
 	@Column(name="order_tracking_number")
 	private String orderTrackingNumber;
 	
-	@Column(name="total_qauntity")
-	private int totalQauntity;
+	@Column(name="total_quantity")
+	private int totalQuantity;
 	
 	
 	@Column(name="total_price")
@@ -83,17 +83,13 @@ public class Order {
 		
 	}
 
-
-
-	
-
-	public Order(Long id, String orderTrackingNumber, int totalQauntity, BigDecimal totalPrice, String status,
+	public Order(Long id, String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, String status,
 			Date dateCreated, Date lastUpdated, Set<OrderItem> orderItems, Customer customer, Address shippingAddress,
 			Address billinAddress) {
 		super();
 		this.id = id;
 		this.orderTrackingNumber = orderTrackingNumber;
-		this.totalQauntity = totalQauntity;
+		this.totalQuantity = totalQuantity;
 		this.totalPrice = totalPrice;
 		this.status = status;
 		this.dateCreated = dateCreated;
@@ -120,12 +116,12 @@ public class Order {
 		this.orderTrackingNumber = orderTrackingNumber;
 	}
 
-	public int getTotalQauntity() {
-		return totalQauntity;
+	public int getTotalQuantity() {
+		return totalQuantity;
 	}
 
-	public void setTotalQauntity(int totalQauntity) {
-		this.totalQauntity = totalQauntity;
+	public void setTotalQuantity(int totalQuantity) {
+		this.totalQuantity = totalQuantity;
 	}
 
 	public BigDecimal getTotalPrice() {
@@ -160,8 +156,6 @@ public class Order {
 		this.lastUpdated = lastUpdated;
 	}
 
-	
-	
 	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -169,7 +163,6 @@ public class Order {
 	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
-	
 
 	public Customer getCustomer() {
 		return customer;
@@ -197,15 +190,16 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", orderTrackingNumber=" + orderTrackingNumber + ", totalQauntity=" + totalQauntity
+		return "Order [id=" + id + ", orderTrackingNumber=" + orderTrackingNumber + ", totalQuantity=" + totalQuantity
 				+ ", totalPrice=" + totalPrice + ", status=" + status + ", dateCreated=" + dateCreated
 				+ ", lastUpdated=" + lastUpdated + ", orderItems=" + orderItems + ", customer=" + customer
 				+ ", shippingAddress=" + shippingAddress + ", billinAddress=" + billinAddress + "]";
 	}
-	
+
 
 	
 	
-	
+
+
 	
 }
