@@ -9,6 +9,7 @@ import com.hercodecommerce.demo.entity.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
 
 	
-	
+	Customer findByEmail(String theEmail);
+
 	
 }

@@ -21,6 +21,7 @@ public class CheckoutServiceImpl implements CheckoutService{
 	private CustomerRepository customerRepository;
 	
 	
+	
 	@Autowired
 	public CheckoutServiceImpl(CustomerRepository customerRepository) {
 		this.customerRepository = customerRepository;
@@ -49,6 +50,18 @@ public class CheckoutServiceImpl implements CheckoutService{
 		
 //		populate customer with order
 		Customer customer = purchase.getCustomer();
+		
+// check if this is an existing customer
+		String theEmail = customer.getEmail();
+		
+		Customer customerFromDBCustomer= customerRepository.findByEmail(theEmail);
+		
+		if(customerFromDBCustomer !=null) {
+			
+			customer = customerFromDBCustomer;
+		}
+		
+		
 		customer.add(order);
 		
 		
