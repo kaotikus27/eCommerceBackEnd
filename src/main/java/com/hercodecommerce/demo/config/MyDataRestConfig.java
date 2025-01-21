@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.util.pattern.PathPattern;
 
 import com.hercodecommerce.demo.entity.Country;
+import com.hercodecommerce.demo.entity.Order;
 import com.hercodecommerce.demo.entity.Product;
 import com.hercodecommerce.demo.entity.ProductCategory;
 import com.hercodecommerce.demo.entity.State;
@@ -64,6 +65,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 		// disable the States and Country HTTP
 		disableHttpMethods(Country.class, config, theUnsuppportedActionsHttpMethods);
 		disableHttpMethods(State.class, config, theUnsuppportedActionsHttpMethods);
+		disableHttpMethods(Order.class, config, theUnsuppportedActionsHttpMethods);
 		
 		// -call an internal helper method
 		exposedId(config);
