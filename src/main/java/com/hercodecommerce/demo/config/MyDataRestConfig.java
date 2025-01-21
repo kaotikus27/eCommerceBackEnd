@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.util.pattern.PathPattern;
 
 import com.hercodecommerce.demo.entity.Country;
 import com.hercodecommerce.demo.entity.Product;
@@ -23,6 +25,9 @@ import jakarta.persistence.metamodel.EntityType;
 @Configuration
 public class MyDataRestConfig implements RepositoryRestConfigurer {
 
+	
+	@Value("${allowed.origins}")
+	private String[] theAllowedOrigins;
 	
 	private EntityManager entityManager;
 	
@@ -39,7 +44,10 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 		RepositoryRestConfigurer.super.configureRepositoryRestConfiguration(config, cors);
 		
 		HttpMethod[] theUnsuppportedActionsHttpMethods = {
-				HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE
+				HttpMethod.PUT, 
+				HttpMethod.POST, 
+				HttpMethod.DELETE,
+				HttpMethod.PATCH
 		};
 		
 		
@@ -59,6 +67,9 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 		
 		// -call an internal helper method
 		exposedId(config);
+		
+	    //config cors mapping
+		cors.addMapping(config.getBasePath() + "/**").allowedOrigins(theAllowedOrigins);
 	}
 
 

@@ -61,9 +61,7 @@ public class CheckoutServiceImpl implements CheckoutService{
 			customer = customerFromDBCustomer;
 		}
 		
-		
 		customer.add(order);
-		
 		
 //		save to the database
 		customerRepository.save(customer);

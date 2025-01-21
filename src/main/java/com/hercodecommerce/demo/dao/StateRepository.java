@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.hercodecommerce.demo.entity.State;
 
-@CrossOrigin("http://localhost:4200")
+
 @RepositoryRestResource
 public interface StateRepository extends JpaRepository<State, Integer>{
 

@@ -11,7 +11,7 @@ import com.hercodecommerce.demo.dto.Purchase;
 import com.hercodecommerce.demo.dto.PurschaseResponse;
 import com.hercodecommerce.demo.service.CheckoutService;
 
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/api/checkout/purchase")
 public class CheckoutController {
