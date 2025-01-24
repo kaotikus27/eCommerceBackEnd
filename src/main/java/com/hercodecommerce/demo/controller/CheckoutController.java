@@ -14,6 +14,7 @@ import com.hercodecommerce.demo.service.CheckoutService;
 
 @RestController
 @RequestMapping("/api/checkout/purchase")
+@CrossOrigin("http://localhost:4200")
 public class CheckoutController {
 	
 	private CheckoutService checkoutService;
@@ -23,7 +24,7 @@ public class CheckoutController {
 		this.checkoutService = checkoutService;
 	}
 	
-	@PostMapping
+	@PostMapping("/purchase")
 	public PurschaseResponse placeOrder(@RequestBody Purchase purchase) {
 		PurschaseResponse purschaseResponse = checkoutService.placeOrder(purchase);
 		

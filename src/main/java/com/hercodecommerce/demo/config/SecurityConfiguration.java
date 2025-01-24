@@ -1,14 +1,13 @@
 package com.hercodecommerce.demo.config;
-
-import org.springframework.cache.annotation.CachingConfigurer;
+import com.okta.spring.boot.oauth.Okta;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
-
-import com.okta.spring.boot.oauth.Okta;
 
 @Configuration
 public class SecurityConfiguration {
@@ -16,24 +15,27 @@ public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
-		//protect the end point /api/orders
-		http.authorizeRequests(configurer -> 
-				configurer.requestMatchers("/api/orders/**")
-				.authenticated())
-				.oauth2ResourceServer()
-				.jwt();		
-		
-		//add CORS filters
-		http.cors();
-		
-		// add content negotiation strategy
-		http.setSharedObject(ContentNegotiationStrategy.class, 
-				new HeaderContentNegotiationStrategy());
-		
-		// force a non-empty response body for 401's to make the response more friendly
-		Okta.configureResourceServer401ResponseBody(http);
-		
-		return http.build();
-	}
+		//protect endpoint /api/orders
+        http.authorizeHttpRequests(requests ->
+                        requests
+                                .requestMatchers("/api/orders/**")
+                                .authenticated()
+                                .anyRequest().permitAll())
+                .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
+ 
+        // + CORS filters
+        http.cors(Customizer.withDefaults());
+ 
+        // + content negotiation strategy
+        http.setSharedObject(ContentNegotiationStrategy.class, new HeaderContentNegotiationStrategy());
+ 
+        // + non-empty response body for 401 (more friendly)
+        Okta.configureResourceServer401ResponseBody(http);
+ 
+        // we are not using Cookies for session tracking >> disable CSRF
+        http.csrf(AbstractHttpConfigurer::disable);
+ 
+        return http.build();
+    }
 	
 }
